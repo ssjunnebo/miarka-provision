@@ -6,6 +6,8 @@ Production deployments on the monthly release cycle are done on the last Monday 
 
 Stage deployments from the bimonthly branch can be made outside of the monthly release cycle. The changes on the bimonthly branch would generally be pulled to the monthly branch and deployed to production in the monthly release cycle once all validations are complete.
 
+Important: It is very important to not squash commits before merging persistent branches (monthly/bimonthly/main). This is however encouraged when merging feature branches that should be deleted after merge.
+
 ## Requirements
 
 The git repository does not contain any sensitive credentials. Instead, these need to be specified in the correct file under `env_vars` and `env_secrets` in the checked out `miarka-provision` folder you will be deploying from. In practice, you will probably copy these files from `/vulpes/ngi/deploy` or from the last deployment and only modify them when something needs changing.

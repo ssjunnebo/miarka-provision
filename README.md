@@ -23,7 +23,7 @@ Below are the main tasks and commands to perform for a staging or production dep
 * Create a change log
     * This usually means [comparing main to monthly](https://github.com/NationalGenomicsInfrastructure/miarka-provision/compare/main...monthly) and list all changes that will be introduced. Save this list locally.
 *  Create the new release **[Production deployment only]**
-    * Create a PR to merge monthly into main
+    * Create a PR to merge monthly into main (NOTE: Do NOT squash commits before merging persistent branches (monthly/bimonthly/main), this will mess up the deployment flow)
     * When merged, create a release. The tag should be `v[YY].[MM]`. For example `v26.03` if the deployment is done in March 2026. The tag should point to the current head of the main branch. Add the change log to the release description.
 * Deploy
     * Log on to Miarka3 and perform the following commands:
@@ -46,7 +46,7 @@ ssh miarka2.uppmax.uu.se exit
 ansible-playbook -i inventory.yml sync.yml -e deployment_environment=[staging / production]
 ```
 * Create site-specific directories
-    * Run the following as the func account of your site (and ask a deployment team member of other site to run it as theirs):
+    * Run the following on miarka1 (production) or miarka2 (staging) as the func account of your site (and ask a deployment team member of other site to run it as theirs):
 ```
 /vulpes/ngi/[staging / production]/latest/resources/create_static_contents_[upps / sthlm].sh
 ```
