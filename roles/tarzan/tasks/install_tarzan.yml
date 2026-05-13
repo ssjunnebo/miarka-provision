@@ -41,10 +41,16 @@
     dest: "{{ tarzan_singularity_image_file_dest }}"
     checksum: "{{ tarzan_singularity_image_sha1 }}"
 
-- name: modify crontab to start kong
+- name: modify crontab to start kong after reboot
   lineinfile:
     dest: "{{ ngi_pipeline_conf }}/crontab_{{ site }}"
-    line: '@reboot sleep 60 && source $HOME/.bash_profile && {{ tarzan_start_script }} &> /dev/null'
+    line: '@reboot sleep 120 && source $HOME/.bash_profile && {{ tarzan_start_script }} &> /dev/null'
+    backup: no
+
+- name: add hourly check to crontab to start Kong if it is not running
+  lineinfile:
+    dest: "{{ ngi_pipeline_conf }}/crontab_{{ site }}"
+    line: '11 * * * * source $HOME/.bash_profile && {{ tarzan_start_script }} &> /dev/null'
     backup: no
 
 - name: add static folders to be created
