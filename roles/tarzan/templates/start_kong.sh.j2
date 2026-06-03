@@ -1,6 +1,11 @@
-#!/bin/bash
+#! /bin/bash -l
 
-/usr/bin/singularity instance stop -F {{ tarzan_singularity_container_name }} 2>/dev/null || echo "No singularity instance '{{ tarzan_singularity_container_name }}' running... ignoring"
+# check if kong is already running
+if [ ! -z "`/usr/bin/singularity instance list | grep {{ tarzan_singularity_container_name }}`" ]
+then
+  # if it is running, we'll just exit politely
+  exit 0
+fi
 
 /usr/bin/singularity instance start \
 --bind "{{ tarzan_server_conf_file }}:{{ tarzan_singularity_container_server_conf_file }}" \
