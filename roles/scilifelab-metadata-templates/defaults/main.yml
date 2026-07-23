@@ -1,0 +1,3 @@
+metadata_templates_repo: https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates
+metadata_templates_dest: "{{ sw_path }}/scilifelab-metadata-templates"
+metadata_templates_version: eb95400f9d6f49762977ab58a737ff26d06d7391
