@@ -8,7 +8,7 @@
 
 - name: Install scilifelab-metadata-templates
   pip:
-    name: "file:{{ metadata_templates_dest }}[genomics]"
+    name: "scilifelab-metadata-templates[genomics] @ file://{{ metadata_templates_dest }}"
     executable: "{{ ngi_pipeline_venv }}/bin/pip"
 
 
